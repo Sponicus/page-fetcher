@@ -1,5 +1,5 @@
 const net = require('net');
-const fs = require('fs');//filestream!!!!! lets us interact with our files!!!!
+const fs = require('fs');
 const conn = net.createConnection({
   host: 'example.edu',
   port: 80
@@ -13,7 +13,6 @@ conn.on('connect', () => {
   conn.write(`\r\n`);
 });
 
-//////////////GOT FS writeFile to work!!!//////////////////////
 conn.on('data', (data) => {
   new Promise ((resolve) => {
     fs.writeFile(`./example.edu.html`, data, err => {
