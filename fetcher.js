@@ -15,14 +15,19 @@ conn.on('connect', () => {
 
 //////////////GOT FS writeFile to work!!!//////////////////////
 conn.on('data', (data) => {
+  new Promise ((resolve) => {
     fs.writeFile(`./example.edu.html`, data, err => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    console.log('file written')
-  }) 
-  // fs.readFile() //CURRENTLY A PLACEHOLDER ---> need to implement
-  console.log(`Downloaded and saved INSERT NUMBER HERE bytes to ./example.edu.html.`); // Currently looks for something that does not YET exist ===> ${fileSize}
+      if (err) {
+        console.error(err)
+        return
+      }
+      console.log('file written')
+      resolve();
+    })
+  }).then(() => {
+    fs.readFile(`./example.edu.html`, (err, data) => {
+      console.log(`Downloaded and saved ${data.byteLength} bytes to ./example.edu.html.`);
+    })
+  })
   conn.end();
 });
