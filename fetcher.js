@@ -4,12 +4,6 @@ const conn = net.createConnection({
   host: 'example.edu',
   port: 80
 });
-///////////edit code below for creating new file////////////////////////
-// fs.writeFile('<fileName>',<contenet>, callbackFunction)
-////////////////////////////////////////////////////////////////////////
-
-///////////////ITS MIDNIGHT AND BRAIN SHUT OFF/////////////////////////
-conn.setEncoding('UTF8');
 
 conn.on('connect', () => {
   console.log(`Connected to server!`);
@@ -19,12 +13,16 @@ conn.on('connect', () => {
   conn.write(`\r\n`);
 });
 
-conn.on('data', (data,fileSize) => {
+//////////////GOT FS writeFile to work!!!//////////////////////
+conn.on('data', (data) => {
   // console.log(data);//switch to function that saves file --> where we create ${fileSize}
-  fs.writeFile(`index`,data, runThisWhenDone) //{
-    // runThisWhenDone();
-  // };
-  
+  fs.writeFile(`./example.edu.html`, data, err => {
+    if (err) {
+      console.error(err)
+      return
+    }
+    console.log('file written')
+  }) 
   // fileSize(somethingGoesHere)//CURRENTLY A PLACEHOLDER
   console.log(`Downloaded and saved {fileSize} bytes to ./index.html.`); // Currently looks for something that does not YET exist
   conn.end();
