@@ -15,15 +15,14 @@ conn.on('connect', () => {
 
 //////////////GOT FS writeFile to work!!!//////////////////////
 conn.on('data', (data) => {
-  // console.log(data);//switch to function that saves file --> where we create ${fileSize}
-  fs.writeFile(`./example.edu.html`, data, err => {
+    fs.writeFile(`./example.edu.html`, data, err => {
     if (err) {
       console.error(err)
       return
     }
     console.log('file written')
   }) 
-  // fileSize(somethingGoesHere)//CURRENTLY A PLACEHOLDER
-  console.log(`Downloaded and saved {fileSize} bytes to ./index.html.`); // Currently looks for something that does not YET exist
+  // fs.readFile() //CURRENTLY A PLACEHOLDER ---> need to implement
+  console.log(`Downloaded and saved INSERT NUMBER HERE bytes to ./example.edu.html.`); // Currently looks for something that does not YET exist ===> ${fileSize}
   conn.end();
 });
