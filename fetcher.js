@@ -5,9 +5,10 @@ const conn = net.createConnection({
   port: 80
 });
 ///////////edit code below for creating new file////////////////////////
-// fs.write('')
+// fs.writeFile('<fileName>',<contenet>, callbackFunction)
 ////////////////////////////////////////////////////////////////////////
 
+///////////////ITS MIDNIGHT AND BRAIN SHUT OFF/////////////////////////
 conn.setEncoding('UTF8');
 
 conn.on('connect', () => {
@@ -19,9 +20,12 @@ conn.on('connect', () => {
 });
 
 conn.on('data', (data,fileSize) => {
-  console.log(data);//switch to function that saves file --> where we create ${fileSize}
-  fileSize(somethingGoesHere)//CURRENTLY A PLACEHOLDER
-  console.log(`Downloaded and saved ${fileSize} bytes to ./${host}.html.`); // Currently looks for something that does not YET exist
+  // console.log(data);//switch to function that saves file --> where we create ${fileSize}
+  fs.writeFile(`index`,data, runThisWhenDone) //{
+    // runThisWhenDone();
+  // };
+  
+  // fileSize(somethingGoesHere)//CURRENTLY A PLACEHOLDER
+  console.log(`Downloaded and saved {fileSize} bytes to ./index.html.`); // Currently looks for something that does not YET exist
   conn.end();
 });
-
